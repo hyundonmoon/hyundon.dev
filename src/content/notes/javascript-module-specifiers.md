@@ -5,8 +5,6 @@ summary: "Exploring JavaScript's module specifier types and how they're interpre
 language: "English"
 ---
 
-# Module specifiers
-
 ## What is a module specifier?
 
 A module specifier is a string used in JavaScript to identify and locate a module. It points to the module file, enabling the JavaScript environment to resolve and load the module when it is imported.
@@ -58,10 +56,20 @@ In contrast, by default, browsers do not support bare module specifiers. Browser
 
 ---
 
-### Works Cited
+## References
 
-- Clark, L. (2018, March 28). Es modules: A cartoon deep-dive. Mozilla Hacks. <https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/>
-- Huang, Y. (2023, February 23). JavaScript import maps, part 1: Introduction. SpiderMonkey. <https://spidermonkey.dev/blog/2023/02/23/javascript-import-maps-part-1-introduction.html>
-- JavaScript modules. MDN. (n.d.). <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules>
-- Osmani, A., &amp; Bynens, M. (2018, June 18). JavaScript modules. V8. <https://v8.dev/features/modules>
-- Rauschmayer, A. (n.d.). Modules. JavaScript for impatient programmers. <https://exploringjs.com/impatient-js/ch_modules.html#module-specifiers>
+- Clark, Lin. [ES modules: A cartoon deep-dive][1]
+
+- Huang, Yoshi. [JavaScript Import maps, Part 1: Introduction][2]
+
+- MDN. [JavaScript modules][3]
+
+- Osmani, Addy &#38; Bynens, Mathias. [JavaScript modules][4]
+
+- Rauschmayer, Axel. [Modules]5
+
+[1]: https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/
+[2]: https://spidermonkey.dev/blog/2023/02/23/javascript-import-maps-part-1-introduction.html
+[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+[4]: https://v8.dev/features/modules
+[5]: https://exploringjs.com/js/book/ch_modules.html

@@ -97,14 +97,20 @@ DOM과 CSSOM 생성이 끝난 후, 브라우저는 DOM과 CSSOM을 결합해 **�
 
 ### Works Cited
 
-- Aderinokun, Ire. “Understanding the Critical Rendering Path.” Bitsofcode, 17 Jan. 2017, [bitsofco.de/understanding-the-critical-rendering-path/](https://bitsofco.de/understanding-the-critical-rendering-path/).
+- Aderinokun, Ire. [“Understanding the Critical Rendering Path”][1]
 
-- “Critical Rendering Path.” MDN, [developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path](https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path).
+- MDN. [“Critical Rendering Path.”][2]
 
-- Grigorik, Ilya. “Critical Rendering Path.” Web Fundamentals, Google, [developers.google.com/web/fundamentals/performance/critical-rendering-path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path).
+- Grigorik, Ilya. [“Critical Rendering Path”][3]
 
-- Kadlec, Tim. “When CSS Blocks.” When CSS Blocks - Web Performance Consulting | TimKadlec.com, 13 Feb. 2020, [timkadlec.com/remembers/2020-02-13-when-css-blocks/](https://timkadlec.com/remembers/2020-02-13-when-css-blocks/).
+- Kadlec, Tim. [“When CSS Blocks”][4]
 
-- Roberts, Harry. “CSS and Network Performance.” CSS Wizardry, 9 Nov. 2018, [csswizardry.com/2018/11/css-and-network-performance/](https://csswizardry.com/2018/11/css-and-network-performance/).
+- Roberts, Harry. [“CSS and Network Performance”][5]
 
 - 이웅모 . “브라우저의 렌더링 과정.” 모던 자바스크립트 Deep Dive, 위키북스.
+
+[1]: https://bitsofco.de/understanding-the-critical-rendering-path/
+[2]: https://developer.mozilla.org/en-US/docs/Web/Performance/Critical_rendering_path
+[3]: https://developers.google.com/web/fundamentals/performance/critical-rendering-path
+[4]: https://timkadlec.com/remembers/2020-02-13-when-css-blocks/
+[5]: https://csswizardry.com/2018/11/css-and-network-performance/

@@ -55,10 +55,14 @@ The browser decides whether or not to send the real request with actual paramete
 
 ---
 
-### Works Cited
+## References
 
-Mozilla. (n.d.). Cross-Origin Resource Sharing (CORS) - HTTP: MDN. MDN Web Docs. [https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
+- MDN. [Cross-Origin Resource Sharing (CORS)][1]
 
-Mozilla. (n.d.). Same-origin policy - Web security: MDN. MDN. [https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy).
+- MDN. [Same-origin policy][2]
 
-Steve Hobbs. What is CORS? Complete Tutorial on Cross-Origin Resource Sharing. Auth0. [https://auth0.com/blog/cors-tutorial-a-guide-to-cross-origin-resource-sharing/](https://auth0.com/blog/cors-tutorial-a-guide-to-cross-origin-resource-sharing/).
+- Hobbs, Steve. [CORS Tutorial: A Guide to Cross-Origin Resource Sharing][3]
+
+[1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+[2]: https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy
+[3]: https://auth0.com/blog/cors-tutorial-a-guide-to-cross-origin-resource-sharing/

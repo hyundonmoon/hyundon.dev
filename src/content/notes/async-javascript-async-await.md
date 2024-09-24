@@ -95,12 +95,16 @@ By using _async/await_, JavaScript developers no longer have to create long Prom
 
 ---
 
-### Works Cited
+## References
 
-- Archibald, Jake. “Async Functions: Making Promises Friendly.” Web.dev, [web.dev/async-functions/](https://web.dev/async-functions/).
+- Archibald, Jake. [“Async Functions: Making Promises Friendly.”][1]
 
-- “Async Function - Javascript: MDN.” JavaScript | MDN, [developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function).
+- MDN. [async function”][2]
 
-- “Asynchronous JavaScript.” JavaScript: The Definitive Guide, by David Flanagan, 7th ed., O'Reilly Media, 2020.
+- “Asynchronous JavaScript.” JavaScript: The Definitive Guide, by David Flanagan, 7th ed., O'Reilly Media, 2020
 
-- “Await.” JavaScript | MDN, [developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await).
+- MDN. [await”][3]
+
+[1]: https://web.dev/async-functions/
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await

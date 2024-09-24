@@ -167,7 +167,7 @@ Variables declared via let are mutable, while those declared with const are not.
 
 ---
 
-### Works Cited
+## References
 
 - “Functions for the Master: Closures and Scopes.” Secrets of the JavaScript Ninja, by John Resig et al., 2nd ed., Manning, 2016.
 
@@ -176,3 +176,4 @@ Variables declared via let are mutable, while those declared with const are not.
 - “Variables and Assignment.” JavaScript for Impatient Programmers, by Axel Rauschmayer, McGraw-Hill Education, 2019.
 
 - “Variables: Scopes, Environments, and Closures.” Speaking JavaScript, by Axel Rauschmayer, O'Reilly Media, Inc., 2014.
+

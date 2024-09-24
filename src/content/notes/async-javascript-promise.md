@@ -290,18 +290,25 @@ Promise chains that look like this completely miss the point of using Promises i
 
 ---
 
-### Works Cited
+## References
 
-- Archibald, Jake. “JavaScript Promises: An Introduction.” Web.dev, [web.dev/i18n/en/promises/](https://web.dev/i18n/en/promises/)
+- Archibald, Jake. [“JavaScript Promises: An Introduction”][1]
 
 - “Asynchronous JavaScript.” JavaScript: The Definitive Guide, by David Flanagan, 7th ed., O'Reilly Media, 2020
 
-- Denicola, Domenic. “States and Fates.” GitHub, 24 Apr. 2014, [github.com/domenic/promises-unwrapping/blob/master/docs/states-and-fates.md](https://github.com/domenic/promises-unwrapping/blob/master/docs/states-and-fates.md)
+- Denicola, Domenic. [“States and Fates”][2]
 
-- Lawson, Nolan. “We Have a Problem with Promises.” Pouchdb, 15 May 2015, [pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html](https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html)
+- Lawson, Nolan. [“We Have a Problem with Promises”][3]
 
-- “Promise Objects.” ECMAScript® 2022 Language&nbsp;Specification, [tc39.es/ecma262/#sec-promise-objects](https://tc39.es/ecma262/#sec-promise-objects)
+- ECMAScript® 2022 Language Specification. [“Promise Objects”][4]
 
-- “Promise.resolve().” MDN, [developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve).
+- MDN. [“Promise.resolve()”][5]
 
-- “Using Promises.” MDN, [developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)
+- MDN. [“Using Promises”][6]
+
+[1]: https://web.dev/i18n/en/promises/
+[2]: https://github.com/domenic/promises-unwrapping/blob/master/docs/states-and-fates.md
+[3]: https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
+[4]: https://tc39.es/ecma262/#sec-promise-objects
+[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve
+[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises

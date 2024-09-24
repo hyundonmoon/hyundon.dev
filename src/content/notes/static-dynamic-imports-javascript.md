@@ -25,8 +25,12 @@ Note that **import()** isn't a function call. It does not inherit from Function.
 
 ## References
 
-- Bynens, M. (2017, November 21). Dynamic import(). V8. <https://v8.dev/features/dynamic-import>
+- Bynens, Mathias. [Dynamic import()][1]
 
-- Import(). MDN. (n.d.-b). <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import>
+- MDN. [import()][2]
 
-- Import. MDN. (n.d.-a). <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import>
+- MDN. [import][3]
+
+[1]: https://v8.dev/features/dynamic-import
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import
+[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import

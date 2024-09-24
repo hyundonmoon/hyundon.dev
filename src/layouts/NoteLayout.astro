@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Prose from "../components/Prose.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+type Props = CollectionEntry<"notes">["data"];
+const { title, pubDate } = Astro.props;
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(date);
+---
+
+<BaseLayout pageTitle={`${title} | Hyun Don Moon`}>
+  <main>
+    <Prose>
+      <h1>{title}</h1>
+      <i>
+        <time datetime={pubDate.toDateString()}>
+          {formatDate(pubDate)}
+        </time>
+      </i>
+      <slot />
+    </Prose>
+  </main>
+</BaseLayout>
