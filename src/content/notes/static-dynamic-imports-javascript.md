@@ -1,7 +1,7 @@
 ---
 title: "Static imports vs. Dynamic imports in JavaScript"
 pubDate: "2023-08-19"
-summary: "Static and dynamic imports in JavaScript"
+summary: "Comparing static and dynamic imports in JavaScript"
 language: "English"
 ---
 

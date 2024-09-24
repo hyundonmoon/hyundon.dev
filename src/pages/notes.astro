@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import NavLink from "../components/NavLink.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+const notes = await getCollection("notes");
+const sortedNotes = notes.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(date);
+---
+
+<BaseLayout pageTitle="Hyun Don's Blog | Notes">
+  <section class="mb-8 md:text-lg">
+    <h1 class="text-2xl mb-4 font-bold">Notes</h1>
+    <p>
+      These are my notes on web development—things I've learned at work or found
+      interesting as I dive deeper into the field. Occasionally, I'll also share
+      short personal updates to mark memorable events in my life.
+    </p>
+  </section>
+
+  <section>
+    <ul class="divide-y">
+      {
+        notes.map(({ data }) => {
+          const { title, pubDate, language, summary } = data;
+          const formattedDate = formatDate(pubDate);
+          const lang = language === "English" ? "English" : "한국어";
+
+          return (
+            <li class="cursor-pointer py-4 first-of-type:pt-0 last-of-type:pb-0">
+              <NavLink class="text-blue-600">{title}</NavLink>
+              <p class="text-black/75 text-sm md:text-base">
+                {formattedDate}&nbsp;·&nbsp;{lang}&nbsp;·&nbsp;{summary}
+              </p>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+</BaseLayout>
