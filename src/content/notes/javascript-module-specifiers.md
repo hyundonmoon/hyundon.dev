@@ -66,7 +66,7 @@ In contrast, by default, browsers do not support bare module specifiers. Browser
 
 - Osmani, Addy &#38; Bynens, Mathias. [JavaScript modules][4]
 
-- Rauschmayer, Axel. [Modules]5
+- Rauschmayer, Axel. [Modules][5]
 
 [1]: https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/
 [2]: https://spidermonkey.dev/blog/2023/02/23/javascript-import-maps-part-1-introduction.html
