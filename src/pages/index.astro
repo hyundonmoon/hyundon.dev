@@ -1,9 +1,10 @@
 ---
+import Prose from "../components/Prose.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout pageTitle="Hyun Don's Blog">
-  <section class="mb-8 md:text-lg">
+  <Prose>
     <p class="mb-4">
       Hi! I'm <strong>Hyun Don</strong>, a front-end web developer based in
       Seoul, South Korea.
@@ -15,5 +16,5 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       in my life. Thanks for dropping by, and I hope you find something that
       sparks your interest!
     </p>
-  </section>
+  </Prose>
 </BaseLayout>
