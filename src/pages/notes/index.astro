@@ -27,7 +27,7 @@ const formatDate = (date: Date) =>
   <section>
     <ul class="divide-y">
       {
-        notes.map(({ data, slug }) => {
+        sortedNotes.map(({ data, slug }) => {
           const { title, pubDate, language, summary } = data;
           const formattedDate = formatDate(pubDate);
           const lang = language === "English" ? "English" : "한국어";
