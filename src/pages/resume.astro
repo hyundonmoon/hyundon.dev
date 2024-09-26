@@ -1,0 +1,202 @@
+---
+import Prose from "../components/Prose.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout pageTitle="Resume | Hyun Don Moon">
+  <Prose>
+    <h1>Resume</h1>
+    <p>
+      PDF version available <a
+        href="/Hyun_Don_Moon_Frontend_Developer_Resume.pdf"
+        target="_blank">here</a
+      >
+    </p>
+
+    <hr />
+
+    <section>
+      <h2>Hyun Don Moon</h2>
+      <p>
+        <strong>Front-end Web Developer</strong>
+        <br />
+        Seoul, South Korea
+      </p>
+    </section>
+
+    <hr />
+
+    <section>
+      <h2>Contact</h2>
+      <ul>
+        <li>
+          Email: <a href="mailto:hyundonmoon@gmail.com">
+            hyundonmoon@gmail.com</a
+          >
+        </li>
+        <li>
+          LinkedIn: <a href="https://www.linkedin.com/in/hyundonmoon/">
+            linkedin.com/in/hyundonmoon</a
+          >
+        </li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <section>
+      <h2>Summary</h2>
+      <p>
+        <strong>Front-end web developer</strong> with a focus on building practical,
+        performant web applications. Experienced with Angular, TypeScript, React,
+        and RxJS. Enthusiastic about clean, maintainable code and always looking
+        to improve through new challenges.
+      </p>
+    </section>
+
+    <hr />
+
+    <section>
+      <h2>Skills</h2>
+      <ul>
+        <li>Programming languages: JavaScript, TypeScript</li>
+        <li>Frameworks & Libraries: React, Angular, RxJS, Tailwind CSS</li>
+        <li>Other: Git, GitHub, Jira, npm</li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <section>
+      <h2>Work Experience</h2>
+
+      <h3>Front-end Developer</h3>
+      <p>
+        <strong>Swit</strong> | Seoul, South Korea
+        <br />
+        <em>April, 2022 - June, 2024</em>
+      </p>
+
+      <ul>
+        <li>
+          <p>
+            <strong>OKR plugin</strong>
+            <em>(June 2022 - Nov 2022)</em>: Created a detailed view page for
+            Objectives and Key Results and a settings page for managing
+            notifications and member roles. Implemented the existing chat
+            component system into the detail page to enable a comment section.
+            Worked as part of a five-person team, collaborating with one
+            designer, one other frontend developer, and two backend developers.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <strong>Automation plugin</strong>
+            <em>(Jan 2023 - June 2023)</em>: Led the frontend development of an
+            automation feature that enables triggers from one app to cascade
+            across multiple apps. Created components to manage and view
+            automations, including a dashboard for automation statistics.
+            Collaborated with project managers, designers, and external backend
+            developers while providing a rough draft of the backend API.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <strong>Chat component refactor</strong>
+            <em>(Jan 2024 - May 2024)</em>: Used abstract classes and dependency
+            injection to refactor two similar chat components into one,
+            streamlining the codebase. Proactively identified and resolved a
+            long-standing bug related to socket reconnects, which had been
+            reported by clients for over a year, eliminating relevant bug
+            reports.
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <section>
+      <h2>Projects</h2>
+
+      <ul>
+        <li>
+          <p>
+            <a href="/" target="_blank" rel="noopener noreferrer"
+              >Personal blog</a
+            >: A blog for sharing insights and experiences built using Astro,
+            TypeScript, and Tailwind CSS. (
+            <a
+              href="https://github.com/hyundonmoon/hyundon.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub repo
+            </a>)
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <a
+              href="https://github.com/hyundonmoon/tictactoe"
+              target="_blank"
+              rel="noopener noreferrer">Multiplayer Tic-Tac-Toe</a
+            >: A real-time multiplayer game built with React and Node.js,
+            utilizing Socket.io for real-time communication, serving as a React
+            refresher. (<a
+              href="https://github.com/hyundonmoon/tictactoe"
+              target="_blank"
+              rel="noopener noreferrer">GitHub repo</a
+            >)
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <section>
+      <h2>Education</h2>
+
+      <ul>
+        <li>
+          <strong>Korea National Open University | Seoul, South Korea</strong>
+          <br />
+          Bachelor of Science in Computer Science (In-progress)
+          <br />
+          <em>August, 2025</em>
+        </li>
+
+        <li>
+          <strong>Yonsei University | Seoul, South Korea</strong>
+          <br />
+          Bachelor of Arts in Theology, English Language and Literature
+          <br />
+          <em>August, 2021</em>
+        </li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <section>
+      <h2>Languages</h2>
+
+      <ul>
+        <li>
+          <strong>Korean</strong>: Native
+        </li>
+
+        <li>
+          <strong>English</strong>: Fluent (TOEFL: 117, TOEIC: 990)
+        </li>
+
+        <li>
+          <strong>Spanish</strong>: Intermediate (DELE: B2)
+        </li>
+      </ul>
+    </section>
+  </Prose>
+</BaseLayout>
