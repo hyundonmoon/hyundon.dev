@@ -27,6 +27,8 @@ const formatDate = (date: Date) =>
     </section>
   </Prose>
 
+  <br />
+
   <section>
     <ul class="divide-y">
       {
@@ -36,7 +38,7 @@ const formatDate = (date: Date) =>
           const lang = language === "English" ? "English" : "한국어";
 
           return (
-            <li class="cursor-pointer py-4 first-of-type:pt-0 last-of-type:pb-0">
+            <li class="py-6 first-of-type:pt-0 last-of-type:pb-0">
               <NavLink href={`/notes/${slug}`} class="text-blue-600">
                 {title}
               </NavLink>
