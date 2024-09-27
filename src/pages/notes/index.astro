@@ -39,7 +39,11 @@ const formatDate = (date: Date) =>
 
           return (
             <li class="py-6 first-of-type:pt-0 last-of-type:pb-0">
-              <NavLink href={`/notes/${slug}`} class="text-blue-600">
+              <NavLink
+                href={`/notes/${slug}`}
+                class="text-blue-600"
+                data-astro-prefetch
+              >
                 {title}
               </NavLink>
               <p class="text-black/75 text-sm md:text-base">
