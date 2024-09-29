@@ -1,0 +1,96 @@
+---
+title: "효율적인 리소스 로딩: preload와 prefetch 알아보기"
+pubDate: "2024-09-29"
+summary: "preload와 prefetch를 활용하여 웹페이지 로딩 속도를 개선하는 방법을 알아봅니다."
+language: "Korean"
+---
+
+최근 웹 성능 최적화를 공부하던 중 리소스 로딩을 최적화하기 위해 사용할 수 있는 preload, prefetch에 대해 알게 되었습니다. 이 글에서는 `preload`와 `prefetch`의 특징과 차이점, 언제 유용하게 사용할 수 있는지, 그리고 이 블로그를 개발할 때 어떻게 적용했는지에 대해 알아보겠습니다.
+
+## 리소스 로딩 최적화
+
+브라우저는 HTML, CSS, JavaScript 파일을 활용해 Critical Rendering Path라는 과정을 거쳐 웹페이지를 렌더링합니다. 렌더링에 필요한 리소스는 기본적으로 HTML 파싱 시에 발견되며 개발자가 명시적으로 지정하지 않는 한 브라우저는 해당 리소스 요청을 순차적으로 처리합니다. 이때, JavaScript나 CSS의 경우 로딩 및 실행 시에 파싱, 렌더링을 중단시킬 수 있어 빠르고 효율적으로 로딩하는 것이 웹 성능 최적화에 있어 중요한 요소입니다.
+
+브라우저는 각 리소스마다 우선순위를 부여하고, 이를 기반으로 리소스에 대한 네트워크 요청을 보냅니다. 예를 들어, `<head>` 태그 안에 있는 CSS 파일의 경우, CSS는 렌더링을 막는 리소스이기 때문에 브라우저는 해당 파일에 대한 요청 우선순위를 Highest로 지정하고 빠르게 로딩합니다.
+
+<figure>
+  ![CSS priority in Network
+  tab](../../images/notes/preload-prefetch/css-priority.webp)
+</figure>
+
+하지만 브라우저가 상대적으로 늦게 발견하는 중요 리소스들도 있습니다. CSS 파일에서 `@import` 구문을 통해 불러오는 다른 CSS 파일이나, `@font-face`를 통해 불러오는 폰트, 또는 JavaScript 파일 안에서 동적으로 불러오는 이미지 파일이나 또 다른 JavaScript 파일 등이 이에 해당합니다. 이런 경우, 브라우저는 해당 리소스를 발견한 후에야 로딩을 시작하게 되는데, 이에 따라 렌더링 속도가 느려질 수 있습니다.
+
+이런 문제를 해결하기 위해, 미리 브라우저에게 해당 리소스의 존재를 알리고, 보다 더 빠르게 로딩하도록 지시하는 방법이 바로 `preload`와 `prefetch`입니다.
+
+## prefetch
+
+`<link rel="prefetch">` 지시어는 브라우저에게 특정 리소스의 존재에 대해 힌트를 줍니다. 다만, 뒤에 나올 `preload`와는 다르게 해당 리소스의 존재에 대해 알리기만 할 뿐, 높은 우선 순위로 로딩을 요청하지는 않습니다. `prefetch`를 사용하면 브라우저는 리소스 요청 우선 순위를 아주 낮게 설정합니다. 그렇기에 `prefetch`는 현재 페이지에 있는 리소스에 대한 요청 보다는, 추후 페이지 이동 시 필요할 수 있는 리소스를 불러올 때 유용하게 쓰입니다. 요청 우선 순위는 낮지만, 브라우저는 가능하면 이 리소스를 미리 로딩해 캐시에 저장해두기 때문에 페이지 이동 시 더 빠르게 해당 리소스를 사용할 수 있습니다. 넷플릭스에서 과거 HTML, CSS, JavaScript를 prefetch해 회원 가입 화면의 Time-to-Interactive를 30% 가량 앞당겼다는 [사례][3]도 있습니다.
+
+### prefetch 적용하기
+
+<figure>
+  ![prefetch 요청](../../images/notes/preload-prefetch/prefetch-request.webp)
+  <figcaption>prefetch 요청</figcaption>
+</figure>
+
+제가 이 블로그 개발에 사용한 Astro 프레임워크는 기본적으로 [prefetch 기능](https://docs.astro.build/en/guides/prefetch/)을 제공합니다. 저는 이 블로그에서 Notes 페이지에 있는 Note 링크 위에 마우스를 hover할 때, 해당 페이지를 `prefetch` 하도록 했습니다. 미리 해당 페이지를 로딩해두었기 때문에 사용자가 해당 페이지로 이동할 때 기다리는 시간이 거의 없어지는 것을 확인할 수 있었습니다. [/notes](/notes) 페이지에서 네트워크 탭을 열고 Note 링크 위에 마우스를 hover하면 위 이미자와 같이 해당 페이지에 대한 prefetch 요청이 보내지는 것을 확인할 수 있습니다.
+
+## preload
+
+`<link rel="preload">` 지시어는 `prefetch`와 마찬가지로 브라우저에게 특정 리소스의 존재를 알리고, 미리 로딩하도록 지시합니다. 하지만 `prefetch`와 달리 `preload`는 더 강압적인 형태로 브라우저가 특정 리소스를 빠르게 로딩하고 캐시에 저장하도록 합니다. 이렇게 함으로써 렌더링 도중 해당 리소스가 필요하면 네트워크 요청을 보내지 않고 캐시에서 빠르게 가져와 사용할 수 있습니다.
+
+이러한 특성으로 인해 `preload`는 현재 화면에 필요한 리소스 중 중요한 리소스를 미리 불러올 때 유용합니다. 앞서 언급한 CSS 파일 내에서 지정한 배경 이미지나, `@font-face`를 통해 불러오는 폰트 등 리소스 외에도, 지금 당장 실행할 것은 아니지만 곧 필요할 것으로 예상되는 중요한 JavaScript 파일을 미리 로딩할 때 유용합니다. `preload`를 적절히 활용해 이런 리소스를 보다 빠르게 불러오면 페이지 렌더링 속도를 개선해 **LCP**(Largest Contentful Paint)를 앞당기고, **CLS**(Cumulative Layout Shift)를 방지하는 등 사용자에게 더 나은 경험을 제공할 수 있습니다.
+
+`preload`를 사용할 때는 반드시 `as` 속성을 함께 지정해주어야만 합니다. `as` 속성은 브라우저에게 해당 리소스의 종류를 알려줍니다. 브라우저는 `as` 속성을 통해 해당 요청의 우선 순위를 지정하고, 해당 리소스가 캐시에 들어있는지 확인하며, 해당 리소스 요청이 보안 상의 이슈가 있는지 확인합니다. `as` 속성을 지정하지 않으면, 브라우저는 해당 요청을 일반 XHR 요청과 동일하게 판단하여 우선 순위를 지정하기 때문에 개발자가 의도한 대로 동작하지 않을 수 있습니다.
+
+이 외에도 폰트를 불러오는 경우에는 브라우저가 [Anonymous 모드][7]로 CORS가 활성화된 요청을 보냅니다. 이로 인한 에러를 방지하기 위해 폰트를 `preload`할 때는 `as` 외에도 `crossorigin` 속성을 함께 지정해주어야 합니다. 만약 `crossorigin` 속성을 지정하지 않고 폰트를 `preload`하면 폰트를 두 번 불러오는 에러가 발생합니다.
+
+<figure>
+  ![duplicate font
+  request](../../images/notes/preload-prefetch/duplicate-font-request.webp)
+  <figcaption>crossorigin 누락으로 인해 Montserrat 폰트 두 번 요청</figcaption>
+</figure>
+
+### preload 적용하기
+
+이 블로그에서는 기본 폰트로 화면이 렌더링 되었다가 폰트가 로딩되면서 페이지 다시 렌더링 되어 발생하는 FOUT (Flash of Unstyled Text) 현상을 방지하기 위해 `preload`로 폰트를 미리 불러오고 있습니다.
+
+<figure>
+  ![duplicate font
+  request](../../images/notes/preload-prefetch/preloaded-font.webp)
+  <figcaption>preload로 미리 불러온 Montserrat 폰트 파일</figcaption>
+</figure>
+
+폰트를 불러오기 위해 `preload`를 사용했을 때 네트워크 Waterfall은 위와 같습니다. _Montserrat_ 폰트를 페이지에 적용하는 코드는 CSS 파일 안에 들어있지만, 미리 해당 정보를 브라우저에게 알려줌으로써 CSS 파일을 읽기도 전에 폰트 파일에 대한 요청이 빠르게 보내지는 것을 확인할 수 있습니다.
+
+<figure>
+  ![using font without
+  preload](../../images/notes/preload-prefetch/no-preload.webp)
+  <figcaption>preload 없이 폰트 적용</figcaption>
+</figure>
+
+`preload`를 하지 않는다면 브라우저는 CSS 파일을 불러온 후에 CSS 파일에 있는 폰트에 대한 요청을 보냅니다. 위 이미지는 `preload`를 제거한 후 이 블로그에 접속했을 때의 네트워크 Waterfall입니다. 폰트를 사용하는 CSS 파일이 먼저 로딩된 후에야 폰트 파일에 대한 요청이 발생하는 것을 확인할 수 있습니다. 이때 폰트 파일 요청에 대한 우선순위는 `preload`했을 때보다 더 높게 설정되어 있지만, 브라우저가 요청을 상대적으로 늦게 보내기 때문에 폰트 적용도 그만큼 늦어질 수 밖에 없습니다. ([Chrome 리소스 요청 우선순위표][8])
+
+## 정리
+
+이 글에서는 `prefetch`와 `preload`에 대해 알아보았습니다. `prefetch`는 브라우저에게 특정 리소스의 존재에 대해 힌트를 주는 지시어로, 추후 페이지 이동 시 필요할 수 있는 리소스를 미리 로딩할 때 주로 쓰입니다. 이에 비해 `preload`는 페이지 렌더링에 필수적이지만, 브라우저가 늦게 발견하는 핵심 리소스를 더욱 빠르게 로딩하도록 할 수 있는 지시어입니다.
+
+`prefetch`나 `preload`를 적절히 사용하면 브라우저 렌더링 속도를 향상시켜 Core Web Vitals을 개선하고 사용자에게 더 나은 경험을 제공할 수 있습니다. 하지만, 무분별하게 사용하면 오히려 불러와야 하는 리소스가 늘어나 역효과가 날 수 있습니다. 브라우저는 이미 리소스 로딩에 대한 최적화를 수행하고 있기 때문에, `prefetch`나 `preload` 지시어를 꼭 필요한 리소스에 대해서만 시의적절하게 사용하는 것이 좋습니다.
+
+## 참고자료
+
+- Djirdeh, Houssein, et al. [Preload critical assets to improve loading speed][1]
+- Kaleev, Niko. [Preload, Preconnect, Prefetch: Improve Your Site's Performance with Resource Hints][2]
+- Osmani, Addy. [A Netflix Web Performance Case Study][3]
+- Osmani, Addy. [Preload, Prefetch And Priorities in Chrome][4]
+- Pelchat, Simon. [A Link: rel=preload Analysis From the Chrome Data Saver Team][5]
+- Weiss, Yoav. [Preload: What Is It Good For?][6]
+
+[1]: https://web.dev/articles/preload-critical-assets
+[2]: https://nitropack.io/blog/post/resource-hints-performance-optimization
+[3]: https://medium.com/dev-channel/a-netflix-web-performance-case-study-c0bcde26a9d9
+[4]: https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf
+[5]: https://medium.com/reloading/a-link-rel-preload-analysis-from-the-chrome-data-saver-team-5edf54b08715#.xfzt8vvsv
+[6]: https://www.smashingmagazine.com/2016/02/preload-what-is-it-good-for/
+[7]: https://www.w3.org/TR/css-fonts-3/#font-fetching-requirements
+[8]: https://docs.google.com/document/d/1bCDuq9H1ih9iNjgzyAL0gpwNFiEP4TZS-YLRp_RuMlc/edit
