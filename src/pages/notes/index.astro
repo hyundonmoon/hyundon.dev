@@ -1,8 +1,8 @@
 ---
+import NavLink from "@components/NavLink.astro";
+import Prose from "@components/Prose.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import NavLink from "../../components/NavLink.astro";
-import Prose from "../../components/Prose.astro";
-import BaseLayout from "../../layouts/BaseLayout.astro";
 const notes = await getCollection("notes");
 const sortedNotes = notes.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
