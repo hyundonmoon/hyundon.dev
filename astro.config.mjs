@@ -14,4 +14,5 @@ export default defineConfig({
     mdx(),
   ],
   prefetch: true,
+  site: "https://hyundon.dev",
 });
