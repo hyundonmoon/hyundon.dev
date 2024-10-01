@@ -6,6 +6,10 @@ export async function GET(context) {
   const sortedNotes = notes.sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );
+  const rssLangTag = {
+    English: "en",
+    Korean: "ko",
+  };
 
   return rss({
     title: "Hyun Don's Blog",
@@ -17,7 +21,7 @@ export async function GET(context) {
       pubDate: data.pubDate,
       description: data.summary,
       link: `/notes/${slug}`,
-      customData: data.language,
+      customData: `<language>${rssLangTag[data.language] || "en"}</language>`,
     })),
   });
 }
