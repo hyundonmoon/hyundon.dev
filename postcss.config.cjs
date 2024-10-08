@@ -1,3 +1,3 @@
 module.exports = {
-  plugins: [require("purgecss")],
+  plugins: [require("purgecss"), require("cssnano")],
 };
