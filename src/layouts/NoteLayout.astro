@@ -4,7 +4,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import type { CollectionEntry } from "astro:content";
 
 type Props = CollectionEntry<"notes">["data"];
-const { title, pubDate } = Astro.props;
+const { title, pubDate, updatedDate } = Astro.props;
 
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat("en-US", {
@@ -23,6 +23,15 @@ const formatDate = (date: Date) =>
           {formatDate(pubDate)}
         </time>
       </i>
+      {
+        updatedDate && (
+          <i>
+            <time datetime={updatedDate.toDateString()}>
+              (Updated: {formatDate(updatedDate)})
+            </time>
+          </i>
+        )
+      }
       <slot />
     </Prose>
   </main>
