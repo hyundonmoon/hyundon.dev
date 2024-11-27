@@ -1,9 +1,6 @@
 name: Lighthouse Action
 run-name: Lighthouse Action
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
