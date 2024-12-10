@@ -8,7 +8,10 @@
   Cache-Control: max-age=604800, stale-while-revalidate=86400
 
 /notes/
-  Cache-Control: max-age=86400, must-revalidate
+  ! Cache-Control
 
 /now/
   Cache-Control: max-age=86400, stale-while-revalidate=86400
+
+https://hyundon-dev.pages.dev/*
+  X-Robots-Tag: noindex
