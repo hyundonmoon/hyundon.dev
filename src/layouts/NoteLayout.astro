@@ -4,7 +4,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import type { CollectionEntry } from "astro:content";
 
 type Props = CollectionEntry<"notes">["data"];
-const { title, pubDate, updatedDate } = Astro.props;
+const { title, pubDate, updatedDate, summary } = Astro.props;
 
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat("en-US", {
@@ -14,7 +14,7 @@ const formatDate = (date: Date) =>
   }).format(date);
 ---
 
-<BaseLayout pageTitle={`${title} | Hyun Don Moon`}>
+<BaseLayout pageTitle={`${title} | Hyun Don Moon`} pageDescription=`${summary}`>
   <main>
     <Prose>
       <h1>{title}</h1>
