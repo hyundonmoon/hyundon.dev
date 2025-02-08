@@ -39,6 +39,9 @@ importers:
       cssnano:
         specifier: ^7.0.6
         version: 7.0.6(postcss@8.4.47)
+      czg:
+        specifier: ^1.11.0
+        version: 1.11.0
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -985,6 +988,11 @@ packages:
   csso@5.0.5:
     resolution: {integrity: sha512-0LrrStPOdJj+SPCCrGhzryycLjwcgUSHBtxNA8aIDxf0GLsRh1cKYhB00Gd1lDOS4yGH69+SNn13+TWbVHETFQ==}
     engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
+
+  czg@1.11.0:
+    resolution: {integrity: sha512-go39avnHPvDn1HF4LS1qxj5XPGCQexZ9+y8f+0VlE9plZgRyWUOl4rUCwE4vD1azouIhz/KaauB45A7jPfMxpw==}
+    engines: {node: '>=v12.20.0'}
+    hasBin: true
 
   debug@4.3.7:
     resolution: {integrity: sha512-Er2nc/H7RrMXZBFCEim6TCmMk02Z8vLC2Rbi1KEBggpo0fS6l0S1nnapwmIi3yW/+GOJap1Krg4w0Hg80oCqgQ==}
@@ -3654,6 +3662,8 @@ snapshots:
   csso@5.0.5:
     dependencies:
       css-tree: 2.2.1
+
+  czg@1.11.0: {}
 
   debug@4.3.7:
     dependencies:
