@@ -35,7 +35,7 @@ const formatDate = (date: Date) =>
   <section>
     <ul class="divide-y">
       {
-        sortedNotes.map(({ data, slug }) => {
+        sortedNotes.map(({ data, id }) => {
           const { title, pubDate, language, summary } = data;
           const formattedDate = formatDate(pubDate);
           const lang = language === "English" ? "English" : "한국어";
@@ -43,7 +43,7 @@ const formatDate = (date: Date) =>
           return (
             <li class="py-6 first-of-type:pt-0 last-of-type:pb-0">
               <NavLink
-                href={`/notes/${slug}/`}
+                href={`/notes/${id}/`}
                 class="text-blue-600"
                 data-astro-prefetch
               >
