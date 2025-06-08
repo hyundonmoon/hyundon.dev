@@ -1,0 +1,43 @@
+# .github/workflows/update-nvmrc.yml
+name: Update .nvmrc to latest LTS
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - ".nvmrc"
+  workflow_dispatch:
+
+jobs:
+  update-nvmrc:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to push changes to the repository
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get latest LTS Node version
+        id: node
+        run: |
+          latest=$(curl -s https://nodejs.org/dist/index.json | jq -r '[.[] | select(.lts != false)][0].version' | sed 's/^v//')
+          echo "Latest Node LTS: $latest"
+          echo "node_lts=$latest" >> "$GITHUB_OUTPUT"
+
+      - name: Compare and update .nvmrc
+        run: |
+          latest="${{ steps.node.outputs.node_lts }}"
+          if [ ! -f .nvmrc ] || [ "$(cat .nvmrc)" != "$latest" ]; then
+            echo "Updating .nvmrc to $latest"
+            echo "$latest" > .nvmrc
+            git config --global user.name "github-actions"
+            git config --global user.email "github-actions@github.com"
+            git add .nvmrc
+            git commit -m "chore: update Node.js LTS to $latest"
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
+          else
+            echo ".nvmrc already up to date."
+
+          fi
