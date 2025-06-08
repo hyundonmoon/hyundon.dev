@@ -15,7 +15,7 @@ jobs:
       contents: write # Required to push changes to the repository
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -36,7 +36,7 @@ jobs:
             git config --global user.email "github-actions@github.com"
             git add .nvmrc
             git commit -m "chore: update Node.js LTS to $latest"
-            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
+            git push
           else
             echo ".nvmrc already up to date."
 
