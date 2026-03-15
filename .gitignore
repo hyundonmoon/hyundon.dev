@@ -22,3 +22,15 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# playwright MCP
+.playwright-mcp/
+
+# superpowers brainstorming
+.superpowers/
+
+# design mockups
+mockup-*.png
+mockups/
+redesign-*.png
+docs/
