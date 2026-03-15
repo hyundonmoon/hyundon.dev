@@ -1,5 +1,6 @@
 ---
 import Sidebar from "@components/Sidebar.astro";
+import CommandPalette from "@components/CommandPalette.astro";
 import "@styles/base.css";
 
 interface Props {
@@ -43,6 +44,7 @@ const { pageTitle, pageDescription } = Astro.props;
         <slot />
       </main>
     </div>
+    <CommandPalette />
   </body>
 </html>
 
