@@ -3,6 +3,7 @@ title: "JavaScript module specifiers"
 pubDate: "2023-07-29"
 summary: "Exploring JavaScript's module specifier types and how they're interpreted across different environments"
 language: "English"
+category: "dev"
 ---
 
 ## What is a module specifier?

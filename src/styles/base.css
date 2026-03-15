@@ -4,14 +4,86 @@
 
 @layer base {
   @font-face {
-    font-family: "Montserrat";
+    font-family: "JetBrains Mono";
     font-style: normal;
-    font-weight: 100 900;
+    font-weight: 300;
     font-display: swap;
-    src: url(/fonts/Montserrat.woff2) format("woff2");
+    src: url(/fonts/JetBrainsMono-Light.woff2) format("woff2");
+  }
+
+  @font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/JetBrainsMono-Regular.woff2) format("woff2");
+  }
+
+  @font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(/fonts/JetBrainsMono-Medium.woff2) format("woff2");
+  }
+
+  @font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/fonts/JetBrainsMono-Bold.woff2) format("woff2");
+  }
+
+  @font-face {
+    font-family: "JetBrains Mono";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/JetBrainsMono-Italic.woff2) format("woff2");
   }
 
   html {
-    @apply font-montserrat text-black/85;
+    @apply font-mono bg-terminal-bg text-terminal-text;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Subtle scanline overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.02) 2px,
+      rgba(0, 0, 0, 0.02) 4px
+    );
+  }
+}
+
+@layer utilities {
+  .green-glow {
+    text-shadow: 0 0 10px rgba(57, 211, 83, 0.25);
+  }
+
+  .green-glow-box {
+    box-shadow: 0 0 12px rgba(57, 211, 83, 0.25),
+      inset 0 0 12px rgba(57, 211, 83, 0.1);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

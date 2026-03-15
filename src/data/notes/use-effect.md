@@ -3,6 +3,7 @@ title: "useEffect 훅 이해하기"
 pubDate: "2025-1-3"
 summary: "React 공식 문서를 읽으며 useEffect 훅의 본질에 대해 생각해 보았습니다."
 language: "Korean"
+category: "dev"
 ---
 
 Angular로 2년 넘게 개발하다가 React로 넘어오면서 느낀 가장 큰 차이점 중 하나는 바로 컴포넌트 라이프사이클 메소드의 부재였다. Angular에서는 컴포넌트를 만들 때마다 마운트 시 호출되는 ngOnInit이나 언마운트 시 실행되는 ngOnDestroy를 자주 사용했었다. 습관적으로 사용했다기보다는, 컴포넌트 마운트 시 RxJS 스트림을 구독하거나, 언마운트 시 해당 스트림을 해지하는 등 실제로 매우 유용한 작업을 처리할 때 쓰였기 때문에, React에는 왜 이런 메소드가 없을까 궁금해졌다.

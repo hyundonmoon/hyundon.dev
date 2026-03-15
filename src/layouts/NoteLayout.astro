@@ -6,33 +6,29 @@ import type { CollectionEntry } from "astro:content";
 type Props = CollectionEntry<"notes">["data"];
 const { title, pubDate, updatedDate, summary } = Astro.props;
 
-const formatDate = (date: Date) =>
-  new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  }).format(date);
+const formatDate = (date: Date) => date.toISOString().split("T")[0];
 ---
 
-<BaseLayout pageTitle={`${title} | Hyun Don Moon`} pageDescription=`${summary}`>
-  <main>
+<BaseLayout pageTitle={`${title} | Hyun Don Moon`} pageDescription={summary}>
+  <article>
+    <div class="mb-8 pb-4 border-b border-terminal-border">
+      <h1 class="text-xl font-bold text-terminal-text mb-2">{title}</h1>
+      <div class="text-terminal-faint text-[0.75rem]">
+        <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+        {
+          updatedDate && (
+            <span>
+              {" "}· Updated:{" "}
+              <time datetime={updatedDate.toISOString()}>
+                {formatDate(updatedDate)}
+              </time>
+            </span>
+          )
+        }
+      </div>
+    </div>
     <Prose>
-      <h1>{title}</h1>
-      <i>
-        <time datetime={pubDate.toDateString()}>
-          {formatDate(pubDate)}
-        </time>
-      </i>
-      {
-        updatedDate && (
-          <i>
-            <time datetime={updatedDate.toDateString()}>
-              (Updated: {formatDate(updatedDate)})
-            </time>
-          </i>
-        )
-      }
       <slot />
     </Prose>
-  </main>
+  </article>
 </BaseLayout>

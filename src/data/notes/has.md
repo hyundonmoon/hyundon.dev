@@ -4,6 +4,7 @@ pubDate: "2023-07-02"
 updatedDate: "2024-11-14"
 summary: ":has() 가상 클래스에 대해 알아보고, 실무에서 적용했던 사례를 소개합니다."
 language: "Korean"
+category: "dev"
 ---
 
 ## :has() 가상 클래스

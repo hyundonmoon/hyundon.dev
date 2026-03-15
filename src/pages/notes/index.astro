@@ -1,61 +1,151 @@
 ---
-import NavLink from "@components/NavLink.astro";
-import Prose from "@components/Prose.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+
 const notes = await getCollection("notes");
 const sortedNotes = notes.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-const formatDate = (date: Date) =>
-  new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  }).format(date);
+
+const formatDate = (date: Date) => date.toISOString().split("T")[0];
+
+const categories = ["all", "dev", "travel", "life"] as const;
+
+const tagColors: Record<string, { border: string; text: string }> = {
+  dev: { border: "border-terminal-green", text: "text-terminal-green" },
+  travel: { border: "border-terminal-amber", text: "text-terminal-amber" },
+  life: { border: "border-terminal-purple", text: "text-terminal-purple" },
+};
 ---
 
 <BaseLayout
   pageTitle="Notes | Hyun Don Moon"
   pageDescription="My notes on web development and personal updates."
 >
-  <Prose>
-    <section>
-      <h1>Notes</h1>
-      <p>
-        These are my notes on web development—things I've learned at work or
-        found interesting as I dive deeper into the field. Occasionally, I'll
-        also share short personal updates to mark memorable events in my life.
-      </p>
-    </section>
-  </Prose>
+  <div
+    class="flex justify-between items-center pb-3 border-b border-terminal-border mb-4"
+  >
+    <span class="text-[0.7rem] uppercase tracking-[0.15em] text-terminal-dim">
+      All Posts
+    </span>
+    <span class="text-[0.7rem] text-terminal-faint">
+      {sortedNotes.length} entries
+    </span>
+  </div>
 
-  <br />
+  <div class="flex gap-2 mb-4">
+    {
+      categories.map((cat) => (
+        <button
+          class:list={[
+            "category-btn",
+            "px-3 py-1 text-[0.75rem] border rounded transition-colors duration-150 cursor-pointer bg-transparent",
+            cat === "all"
+              ? "border-terminal-green text-terminal-green"
+              : "border-terminal-border text-terminal-dim hover:border-terminal-dim",
+          ]}
+          data-category={cat}
+        >
+          {cat}
+        </button>
+      ))
+    }
+  </div>
 
-  <section>
-    <ul class="divide-y">
-      {
-        sortedNotes.map(({ data, id }) => {
-          const { title, pubDate, language, summary } = data;
-          const formattedDate = formatDate(pubDate);
-          const lang = language === "English" ? "English" : "한국어";
-
-          return (
-            <li class="py-6 first-of-type:pt-0 last-of-type:pb-0">
-              <NavLink
+  <ul class="list-none p-0">
+    {
+      sortedNotes.map(({ data, id }, i) => {
+        const { title, pubDate, summary, category } = data;
+        const color = tagColors[category];
+        return (
+          <li
+            class="note-card"
+            data-category={category}
+            style={`animation: fadeUp 0.3s ease both; animation-delay: ${Math.min(i * 0.05, 0.3)}s`}
+          >
+            <div class="flex justify-between items-baseline gap-4 mb-1">
+              <a
                 href={`/notes/${id}/`}
-                class="text-blue-600"
+                class="text-terminal-text no-underline text-[0.9rem] font-medium transition-colors duration-150 hover:text-terminal-green"
                 data-astro-prefetch
               >
                 {title}
-              </NavLink>
-              <p class="text-black/75 text-sm md:text-base">
-                {formattedDate}&nbsp;·&nbsp;{lang}&nbsp;·&nbsp;{summary}
-              </p>
-            </li>
-          );
-        })
-      }
-    </ul>
-  </section>
+              </a>
+              <span class="flex items-baseline gap-2 shrink-0">
+                <span
+                  class:list={[
+                    "text-[0.65rem] uppercase tracking-wider px-1.5 py-0.5 border rounded",
+                    color.border,
+                    color.text,
+                  ]}
+                >
+                  {category}
+                </span>
+                <span class="text-terminal-faint text-[0.75rem] whitespace-nowrap">
+                  {formatDate(pubDate)}
+                </span>
+              </span>
+            </div>
+            <div class="text-terminal-dim text-[0.8rem] font-light">
+              {summary}
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
 </BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".category-btn");
+  const cards = document.querySelectorAll<HTMLLIElement>(".note-card");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const category = btn.dataset.category;
+
+      buttons.forEach((b) => {
+        if (b === btn) {
+          b.classList.remove(
+            "border-terminal-border",
+            "text-terminal-dim",
+            "hover:border-terminal-dim",
+          );
+          b.classList.add("border-terminal-green", "text-terminal-green");
+        } else {
+          b.classList.remove("border-terminal-green", "text-terminal-green");
+          b.classList.add(
+            "border-terminal-border",
+            "text-terminal-dim",
+            "hover:border-terminal-dim",
+          );
+        }
+      });
+
+      cards.forEach((card) => {
+        if (category === "all" || card.dataset.category === category) {
+          card.style.display = "";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .note-card {
+    padding: 1.15rem 1.25rem;
+    border: 1px solid theme("colors.terminal.border");
+    margin-bottom: 0.5rem;
+    background: theme("colors.terminal.surface");
+    transition: all 0.15s;
+  }
+
+  .note-card:hover {
+    border-color: theme("colors.terminal.green");
+    box-shadow:
+      0 0 12px rgba(57, 211, 83, 0.25),
+      inset 0 0 12px rgba(57, 211, 83, 0.1);
+  }
+</style>

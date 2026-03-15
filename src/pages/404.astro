@@ -1,12 +1,18 @@
 ---
-import NavLink from "@components/NavLink.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
-<BaseLayout pageTitle="Hyun Don's Blog" pageDescription="Page Not Found">
+<BaseLayout pageTitle="404 | hyundon.dev" pageDescription="Page Not Found">
   <div class="my-24 md:my-36 text-center space-y-4">
-    <h1 class="text-xl md:text-4xl font-bold">404 - Page Not Found :(</h1>
-    <p>The page you are looking for does not exist.</p>
-    <NavLink class="block" href="/">Go back home</NavLink>
+    <h1 class="text-xl md:text-4xl font-bold text-terminal-text">
+      404 — Page Not Found
+    </h1>
+    <p class="text-terminal-dim">The page you are looking for does not exist.</p>
+    <a
+      href="/"
+      class="inline-block text-terminal-green hover:underline hover:green-glow"
+    >
+      Go back home
+    </a>
   </div>
 </BaseLayout>

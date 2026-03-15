@@ -3,6 +3,7 @@ title: "Asynchronous JavaScript: async/await"
 pubDate: "2022-03-20"
 summary: "Blurring the line between synchronous and asynchronous code with async/await"
 language: "English"
+category: "dev"
 ---
 
 For the past few weeks, I've been studying asynchronous programming in JavaScript. I found out that there are several different ways of handling asynchrony in JavaScript.

@@ -4,11 +4,11 @@ const { class: className } = Astro.props;
 
 <div
   class=`prose
+  prose-terminal
   max-w-none
   prose-sm md:prose-base
   prose-figure:w-fit
-  prose-figure:mx-auto
-  prose-a:text-blue-600 prose-p:text-justify ${className}`
+  prose-figure:mx-auto ${className}`
 >
   <slot />
 </div>

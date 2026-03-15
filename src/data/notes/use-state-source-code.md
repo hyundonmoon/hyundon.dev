@@ -3,6 +3,7 @@ title: "Digging into React Hook Internals: A few things I learned about useState
 pubDate: "2024-11-07"
 summary: "Digging into React source code to understand why hook order matters and how useState initial values are managed."
 language: "English"
+category: "dev"
 ---
 
 I've been using React and React Hooks for a while now, and so far, I've taken all of its magic for granted. I've read the docs and tried to follow the "Rules of Hooks," but then I was left wondering why the React team decided to enforce such rules and why React Hooks work the way they do. The React docs didn't provide enough information to answer my questions so I decided to dig into the React source code. In this post, I'll share a few things I learned about React Hooks, specifically `useState`, and why the order in which hooks are called matters.

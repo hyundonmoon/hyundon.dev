@@ -3,6 +3,7 @@ title: "HTTP 쿠키"
 pubDate: "2023-06-28"
 summary: "HTTP Cookie 알아보기"
 language: "Korean"
+category: "dev"
 ---
 
 ## HTTP Cookie란

@@ -3,6 +3,7 @@ title: "Understanding CORS"
 pubDate: "2021-06-10"
 summary: "Trying to figure out what CORS is and how you can solve CORS-related problems"
 language: "English"
+category: "dev"
 ---
 
 While working on my [travel-companion finder project](https://travellrs.co), I encountered the CORS error multiple times. I had a basic grasp of CORS, and I knew what I had to do to work around it. Having said that, I also knew that I probably wouldn’t have been able to give a comprehensive answer on the subject if it came up during an interview. So, I decided to read a few articles on CORS and summarize them here to gain a deeper understanding of it.

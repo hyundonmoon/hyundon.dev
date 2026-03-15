@@ -1,23 +1,155 @@
 ---
-import Prose from "@components/Prose.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import currently from "@data/currently.json";
+
+const notes = await getCollection("notes");
+const recentNotes = notes
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const formatDate = (date: Date) => date.toISOString().split("T")[0];
+
+const tagColors: Record<string, { border: string; text: string }> = {
+  dev: { border: "border-terminal-green", text: "text-terminal-green" },
+  travel: { border: "border-terminal-amber", text: "text-terminal-amber" },
+  life: { border: "border-terminal-purple", text: "text-terminal-purple" },
+};
 ---
 
 <BaseLayout
-  pageTitle="Hyun Don's Blog"
-  pageDescription="Hyun Don's Blog - Web Developer, Traveler, and Foodie"
+  pageTitle="hyundon.dev"
+  pageDescription="Hyun Don Moon — Developer, sometimes writer. Seoul, South Korea."
 >
-  <Prose>
-    <p class="mb-4">
+  <!-- Terminal flair intro -->
+  <div class="mb-6">
+    <div class="mb-1.5">
+      <span class="text-terminal-green">~</span>
+      <span class="text-terminal-dim">$</span> whoami
+    </div>
+    <p class="text-[0.9rem] leading-[1.7]">
       Hi! I'm <strong>Hyun Don</strong>, a front-end web developer based in
-      Seoul, South Korea.
+      Seoul, South Korea.<span class="cursor"></span>
     </p>
-
-    <p>
+    <p class="text-terminal-dim text-[0.8rem] leading-[1.7] mt-2.5">
       This is where I share what I'm learning as I grow as a web developer,
       showcase my interests, and occasionally post updates about what's going on
-      in my life. Thanks for dropping by, and I hope you find something that
-      sparks your interest!
+      in my life. Thanks for dropping by!
     </p>
-  </Prose>
+  </div>
+
+  <!-- Currently section -->
+  <div class="mb-7">
+    <div
+      class="text-[0.7rem] uppercase tracking-[0.15em] text-terminal-dim border-b border-terminal-border pb-1.5 mb-2.5"
+    >
+      Currently
+    </div>
+    <div class="text-terminal-dim text-[0.8rem] leading-[2]">
+      {
+        currently.map(({ label, value }) => (
+          <div>
+            <span class="text-terminal-green">{label}</span>
+            <span class="text-terminal-faint mx-1">&mdash;</span>
+            {value}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Recent Notes -->
+  <div>
+    <div
+      class="flex justify-between items-center border-b border-terminal-border pb-1.5 mb-2.5"
+    >
+      <span
+        class="text-[0.7rem] uppercase tracking-[0.15em] text-terminal-dim"
+      >
+        Recent Notes
+      </span>
+      <a
+        href="/notes/"
+        class="text-[0.7rem] text-terminal-faint no-underline hover:text-terminal-green transition-colors duration-150"
+        data-astro-prefetch
+      >
+        all notes &rarr;
+      </a>
+    </div>
+
+    <ul class="list-none p-0">
+      {
+        recentNotes.map(({ data, id }, i) => {
+          const { title, pubDate, summary, category } = data;
+          const color = tagColors[category];
+          return (
+            <li
+              class="note-card"
+              style={`animation: fadeUp 0.3s ease both; animation-delay: ${i * 0.05}s`}
+            >
+              <div class="flex justify-between items-baseline gap-4 mb-1">
+                <a
+                  href={`/notes/${id}/`}
+                  class="text-terminal-text no-underline text-[0.9rem] font-medium transition-colors duration-150 hover:text-terminal-green"
+                  data-astro-prefetch
+                >
+                  {title}
+                </a>
+                <span class="flex items-baseline gap-2 shrink-0">
+                  <span
+                    class:list={[
+                      "text-[0.65rem] uppercase tracking-wider px-1.5 py-0.5 border rounded",
+                      color.border,
+                      color.text,
+                    ]}
+                  >
+                    {category}
+                  </span>
+                  <span class="text-terminal-faint text-[0.75rem] whitespace-nowrap">
+                    {formatDate(pubDate)}
+                  </span>
+                </span>
+              </div>
+              <div class="text-terminal-dim text-[0.8rem] font-light">
+                {summary}
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
 </BaseLayout>
+
+<style>
+  .cursor {
+    display: inline-block;
+    width: 7px;
+    height: 14px;
+    background: theme("colors.terminal.green");
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .note-card {
+    padding: 1.15rem 1.25rem;
+    border: 1px solid theme("colors.terminal.border");
+    margin-bottom: 0.5rem;
+    background: theme("colors.terminal.surface");
+    transition: all 0.15s;
+  }
+
+  .note-card:hover {
+    border-color: theme("colors.terminal.green");
+    box-shadow:
+      0 0 12px rgba(57, 211, 83, 0.25),
+      inset 0 0 12px rgba(57, 211, 83, 0.1);
+  }
+</style>

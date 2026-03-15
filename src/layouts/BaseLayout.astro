@@ -1,6 +1,5 @@
 ---
-import Footer from "@components/Footer.astro";
-import Header from "@components/Header.astro";
+import Sidebar from "@components/Sidebar.astro";
 import "@styles/base.css";
 
 interface Props {
@@ -16,7 +15,7 @@ const { pageTitle, pageDescription } = Astro.props;
     <meta charset="utf-8" />
     <link
       rel="preload"
-      href="/fonts/Montserrat.woff2"
+      href="/fonts/JetBrainsMono-Regular.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -37,9 +36,32 @@ const { pageTitle, pageDescription } = Astro.props;
     />
   </head>
 
-  <body class="max-w-3xl w-full mx-auto my-0 px-4 py-16 overflow-y-scroll">
-    <Header />
-    <slot />
-    <Footer />
+  <body class="leading-[1.7]">
+    <div class="page">
+      <Sidebar />
+      <main class="min-w-0">
+        <slot />
+      </main>
+    </div>
   </body>
 </html>
+
+<style>
+  .page {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+    gap: 3rem;
+    min-height: 100vh;
+  }
+
+  @media (max-width: 700px) {
+    .page {
+      grid-template-columns: 1fr;
+      padding: 2rem 1rem;
+      gap: 2rem;
+    }
+  }
+</style>

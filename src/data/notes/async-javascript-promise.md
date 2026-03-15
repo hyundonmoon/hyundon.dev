@@ -3,6 +3,7 @@ title: "Asynchronous JavaScript: Promises"
 pubDate: "2022-03-09"
 summary: "A look into Promise-based asynchronous programming in JavaScript"
 language: "English"
+category: "dev"
 ---
 
 ## Pre-ES6

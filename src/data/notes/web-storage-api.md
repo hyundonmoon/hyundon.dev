@@ -3,6 +3,7 @@ title: "Web Storage API"
 pubDate: "2023-06-29"
 summary: "Exploring the Web Storage API and how it enables persistent client-side data storage in web applications"
 language: "Korean"
+category: "dev"
 ---
 
 ## Web Storage API란

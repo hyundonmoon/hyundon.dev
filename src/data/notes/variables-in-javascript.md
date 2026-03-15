@@ -3,6 +3,7 @@ title: "Variables in JavaScript"
 pubDate: "2021-12-21"
 summary: "Understanding the differences between variables declared via var, let, and const."
 language: "English"
+category: "dev"
 ---
 
 Before ES6, the var keyword was the only way of declaring variables in JavaScript. As such, you will most likely come across variables declared via var in courses, books, and code that predate ES6. However, almost all post-ES6 code prefers the let and const keywords rather than var. In fact, most of the materials that I used to study this topic discouraged students from ever using var when coding.

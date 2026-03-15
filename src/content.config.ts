@@ -9,6 +9,7 @@ const notes = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     language: z.enum(["English", "Korean"]),
+    category: z.enum(["dev", "travel", "life"]),
   }),
 });
 
