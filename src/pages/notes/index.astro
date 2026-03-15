@@ -1,21 +1,14 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { formatDate, tagColors } from "@lib/notes.ts";
 
 const notes = await getCollection("notes");
 const sortedNotes = notes.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-const formatDate = (date: Date) => date.toISOString().split("T")[0];
-
 const categories = ["all", "dev", "travel", "life"] as const;
-
-const tagColors: Record<string, { border: string; text: string }> = {
-  dev: { border: "border-terminal-green", text: "text-terminal-green" },
-  travel: { border: "border-terminal-amber", text: "text-terminal-amber" },
-  life: { border: "border-terminal-purple", text: "text-terminal-purple" },
-};
 ---
 
 <BaseLayout
@@ -63,32 +56,34 @@ const tagColors: Record<string, { border: string; text: string }> = {
             data-category={category}
             style={`animation: fadeUp 0.3s ease both; animation-delay: ${Math.min(i * 0.05, 0.3)}s`}
           >
-            <div class="flex justify-between items-baseline gap-4 mb-1">
-              <a
-                href={`/notes/${id}/`}
-                class="text-terminal-text no-underline text-[0.9rem] font-medium transition-colors duration-150 hover:text-terminal-green"
-                data-astro-prefetch
-              >
-                {title}
-              </a>
-              <span class="flex items-baseline gap-2 shrink-0">
-                <span
-                  class:list={[
-                    "text-[0.65rem] uppercase tracking-wider px-1.5 py-0.5 border rounded",
-                    color.border,
-                    color.text,
-                  ]}
-                >
-                  {category}
+            <a
+              href={`/notes/${id}/`}
+              class="block no-underline group p-[1.15rem_1.25rem]"
+              data-astro-prefetch
+            >
+              <div class="flex justify-between items-baseline gap-4 mb-1">
+                <span class="text-terminal-text text-[0.9rem] font-medium transition-colors duration-150 group-hover:text-terminal-green">
+                  {title}
                 </span>
-                <span class="text-terminal-faint text-[0.75rem] whitespace-nowrap">
-                  {formatDate(pubDate)}
+                <span class="flex items-baseline gap-2 shrink-0">
+                  <span
+                    class:list={[
+                      "text-[0.65rem] uppercase tracking-wider px-1.5 py-0.5 border rounded",
+                      color.border,
+                      color.text,
+                    ]}
+                  >
+                    {category}
+                  </span>
+                  <span class="text-terminal-faint text-[0.75rem] whitespace-nowrap">
+                    {formatDate(pubDate)}
+                  </span>
                 </span>
-              </span>
-            </div>
-            <div class="text-terminal-dim text-[0.8rem] font-light">
-              {summary}
-            </div>
+              </div>
+              <div class="text-terminal-dim text-[0.8rem] font-light">
+                {summary}
+              </div>
+            </a>
           </li>
         );
       })
@@ -133,19 +128,3 @@ const tagColors: Record<string, { border: string; text: string }> = {
   });
 </script>
 
-<style>
-  .note-card {
-    padding: 1.15rem 1.25rem;
-    border: 1px solid theme("colors.terminal.border");
-    margin-bottom: 0.5rem;
-    background: theme("colors.terminal.surface");
-    transition: all 0.15s;
-  }
-
-  .note-card:hover {
-    border-color: theme("colors.terminal.green");
-    box-shadow:
-      0 0 12px rgba(57, 211, 83, 0.25),
-      inset 0 0 12px rgba(57, 211, 83, 0.1);
-  }
-</style>

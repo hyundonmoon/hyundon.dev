@@ -77,6 +77,20 @@
   }
 }
 
+.note-card {
+  border: 1px solid theme("colors.terminal.border");
+  margin-bottom: 0.5rem;
+  background: theme("colors.terminal.surface");
+  transition: all 0.15s;
+}
+
+.note-card:hover {
+  border-color: theme("colors.terminal.green");
+  box-shadow:
+    0 0 12px rgba(57, 211, 83, 0.25),
+    inset 0 0 12px rgba(57, 211, 83, 0.1);
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;
