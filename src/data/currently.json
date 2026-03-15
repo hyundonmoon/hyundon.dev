@@ -1,6 +1,6 @@
 [
-  { "label": "reading", "value": "Liveship Traders Trilogy by Robin Hobb" },
-  { "label": "learning", "value": "Elm and Python" },
-  { "label": "gaming", "value": "The Legend of Zelda: Breath of the Wild" },
-  { "label": "building", "value": "a personal site redesign" }
+  { "label": "reading", "value": "The Art of Spending Money by Morgan Housel" },
+  { "label": "gaming", "value": "Pokemon X on 3DS XL" },
+  { "label": "traveling", "value": "Hong Kong (upcoming)" },
+  { "label": "learning", "value": "CLI/TUI development, exploring Rust" }
 ]
