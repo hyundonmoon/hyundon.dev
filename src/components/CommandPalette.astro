@@ -54,7 +54,7 @@ const searchItems = [...pages, ...noteItems];
   let highlightIndex = 0;
   let currentResults: typeof items = [];
 
-  function esc(s: string) {
+  function escapeHtml(s: string) {
     const d = document.createElement("div");
     d.textContent = s;
     return d.innerHTML;
@@ -86,29 +86,21 @@ const searchItems = [...pages, ...noteItems];
       return;
     }
 
-    let html = "";
-
-    if (pages.length > 0) {
-      html += '<div class="palette-group-label">Pages</div>';
-      pages.forEach((item: any, i: number) => {
-        const idx = i;
-        html += `<div class="palette-item${idx === highlightIndex ? " highlighted" : ""}" data-index="${idx}" data-href="${esc(item.href)}">
-          <span class="palette-item-title">${esc(item.title)}</span>
-          <span class="palette-item-meta">${esc(item.href)}</span>
+    function renderGroup(label: string, groupItems: typeof items, indexOffset: number) {
+      if (groupItems.length === 0) return "";
+      let groupHtml = `<div class="palette-group-label">${label}</div>`;
+      groupItems.forEach((item: any, i: number) => {
+        const idx = indexOffset + i;
+        const meta = item.type === "page" ? item.href : item.date || "";
+        groupHtml += `<div class="palette-item${idx === highlightIndex ? " highlighted" : ""}" data-index="${idx}" data-href="${escapeHtml(item.href)}">
+          <span class="palette-item-title">${escapeHtml(item.title)}</span>
+          <span class="palette-item-meta">${escapeHtml(meta)}</span>
         </div>`;
       });
+      return groupHtml;
     }
 
-    if (notes.length > 0) {
-      html += '<div class="palette-group-label">Notes</div>';
-      notes.forEach((item: any, i: number) => {
-        const idx = pages.length + i;
-        html += `<div class="palette-item${idx === highlightIndex ? " highlighted" : ""}" data-index="${idx}" data-href="${esc(item.href)}">
-          <span class="palette-item-title">${esc(item.title)}</span>
-          <span class="palette-item-meta">${esc(item.date || "")}</span>
-        </div>`;
-      });
-    }
+    let html = renderGroup("Pages", pages, 0) + renderGroup("Notes", notes, pages.length);
 
     resultsContainer.innerHTML = html;
 
@@ -143,36 +135,39 @@ const searchItems = [...pages, ...noteItems];
   document.addEventListener("keydown", (e) => {
     const tag = (e.target as HTMLElement)?.tagName;
     const isOpen = backdrop.classList.contains("visible");
+
     if ((e.metaKey || e.ctrlKey) && e.key === "k") {
       if (!isOpen && (tag === "INPUT" || tag === "TEXTAREA")) return;
       e.preventDefault();
-      if (isOpen) {
-        close();
-      } else {
-        open();
-      }
+      isOpen ? close() : open();
       return;
     }
 
-    if (!backdrop.classList.contains("visible")) return;
+    if (!isOpen) return;
 
-    if (e.key === "Escape") {
-      e.preventDefault();
-      close();
-    } else if (e.key === "ArrowDown") {
-      e.preventDefault();
-      updateHighlight(1);
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      updateHighlight(-1);
-    } else if (e.key === "Enter") {
-      e.preventDefault();
-      if (currentResults.length > 0 && currentResults[highlightIndex]) {
-        window.location.href = currentResults[highlightIndex].href;
-      }
-    } else if (e.key === "Tab") {
-      e.preventDefault();
-      input.focus();
+    switch (e.key) {
+      case "Escape":
+        e.preventDefault();
+        close();
+        break;
+      case "ArrowDown":
+        e.preventDefault();
+        updateHighlight(1);
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        updateHighlight(-1);
+        break;
+      case "Enter":
+        e.preventDefault();
+        if (currentResults[highlightIndex]) {
+          window.location.href = currentResults[highlightIndex].href;
+        }
+        break;
+      case "Tab":
+        e.preventDefault();
+        input.focus();
+        break;
     }
   });
 
@@ -183,7 +178,7 @@ const searchItems = [...pages, ...noteItems];
   });
 </script>
 
-<style>
+<style is:global>
   .palette-backdrop {
     display: none;
     position: fixed;
@@ -231,10 +226,16 @@ const searchItems = [...pages, ...noteItems];
     background: transparent;
     border: none;
     outline: none;
+    box-shadow: none;
     color: theme("colors.terminal.text");
     font-family: inherit;
     font-size: 0.85rem;
     caret-color: theme("colors.terminal.green");
+  }
+
+  .palette-input:focus {
+    outline: none !important;
+    box-shadow: none !important;
   }
 
   .palette-input::placeholder {
@@ -244,6 +245,7 @@ const searchItems = [...pages, ...noteItems];
   .palette-results {
     max-height: 300px;
     overflow-y: auto;
+    padding: 0.25rem 0;
   }
 
   .palette-group-label {
@@ -263,18 +265,30 @@ const searchItems = [...pages, ...noteItems];
     transition: background 0.1s;
   }
 
-  .palette-item:hover,
-  .palette-item.highlighted {
+  .palette-item:hover {
     background: theme("colors.terminal.surface");
+  }
+
+  .palette-item:hover .palette-item-title {
+    color: theme("colors.terminal.text");
+  }
+
+  .palette-item.highlighted {
+    background: theme("colors.terminal.border");
   }
 
   .palette-item-title {
     color: theme("colors.terminal.dim");
     font-size: 0.8rem;
+    transition: color 0.1s;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .palette-item.highlighted .palette-item-title {
-    color: theme("colors.terminal.text");
+    color: theme("colors.terminal.green");
   }
 
   .palette-item-meta {

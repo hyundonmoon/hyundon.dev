@@ -1,28 +1,28 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+
+const links = [
+  { href: "/", label: "home" },
+  { href: "/notes/", label: "notes" },
+  { href: "/about/", label: "about" },
+];
 ---
 
 <BaseLayout pageTitle="404 | hyundon.dev" pageDescription="Page Not Found">
   <div class="my-16 md:my-24 font-mono text-[0.85rem] leading-[1.9]">
-    <div
-      class="text-terminal-text"
-      style="animation: fadeUp 0.3s ease both; animation-delay: 0s"
-    >
+    <div class="text-terminal-text stagger" style="--delay: 0">
       <span class="text-terminal-green">visitor@hyundon.dev</span>:<span
         class="text-terminal-purple">~</span
       >$ find . -name "page"
     </div>
 
-    <div
-      class="text-terminal-amber mt-2"
-      style="animation: fadeUp 0.3s ease both; animation-delay: 0.05s"
-    >
+    <div class="text-terminal-amber mt-2 stagger" style="--delay: 1">
       ⚠ Error 404: page vanished into the void
     </div>
 
     <div
-      class="text-terminal-dim border-l-2 border-terminal-border pl-3 my-3"
-      style="animation: fadeUp 0.3s ease both; animation-delay: 0.1s"
+      class="text-terminal-dim border-l-2 border-terminal-border pl-3 my-3 stagger"
+      style="--delay: 2"
     >
       <div>search completed in 0.042s</div>
       <div>directories scanned: 1,337</div>
@@ -30,35 +30,34 @@ import BaseLayout from "@layouts/BaseLayout.astro";
       <div>coffee consumed: 3 cups</div>
     </div>
 
-    <div
-      class="text-terminal-dim mt-4"
-      style="animation: fadeUp 0.3s ease both; animation-delay: 0.15s"
-    >
+    <div class="text-terminal-dim mt-4 stagger" style="--delay: 3">
       Try one of these instead:
     </div>
 
-    <div
-      class="flex flex-col gap-1 mt-2"
-      style="animation: fadeUp 0.3s ease both; animation-delay: 0.2s"
-    >
-      <a
-        href="/"
-        class="text-terminal-faint no-underline transition-all duration-150 hover:text-terminal-green hover:green-glow flex items-center gap-2"
-      >
-        <span class="text-terminal-faint">~</span> home
-      </a>
-      <a
-        href="/notes/"
-        class="text-terminal-faint no-underline transition-all duration-150 hover:text-terminal-green hover:green-glow flex items-center gap-2"
-      >
-        <span class="text-terminal-faint">~</span> notes
-      </a>
-      <a
-        href="/about/"
-        class="text-terminal-faint no-underline transition-all duration-150 hover:text-terminal-green hover:green-glow flex items-center gap-2"
-      >
-        <span class="text-terminal-faint">~</span> about
-      </a>
+    <div class="flex flex-col gap-1 mt-2 stagger" style="--delay: 4">
+      {
+        links.map(({ href, label }) => (
+          <a href={href} class="suggestion-link">
+            <span class="text-terminal-faint">~</span> {label}
+          </a>
+        ))
+      }
     </div>
   </div>
 </BaseLayout>
+
+<style>
+  .stagger {
+    animation: fadeUp 0.3s ease both;
+    animation-delay: calc(var(--delay) * 0.05s);
+  }
+
+  .suggestion-link {
+    @apply text-terminal-faint no-underline transition-all duration-150 flex items-center gap-2;
+  }
+
+  .suggestion-link:hover {
+    @apply text-terminal-green;
+    text-shadow: 0 0 10px rgba(57, 211, 83, 0.25);
+  }
+</style>
