@@ -47,7 +47,7 @@ const searchItems = [...pages, ...noteItems];
 <script is:inline set:html={`window.__SEARCH_ITEMS__ = ${JSON.stringify(searchItems)};`} />
 
 <script>
-  const items = window.__SEARCH_ITEMS__;
+  const items = (window as any).__SEARCH_ITEMS__;
   const backdrop = document.getElementById("command-palette")!;
   const input = document.getElementById("palette-input")! as HTMLInputElement;
   const resultsContainer = document.getElementById("palette-results")!;
