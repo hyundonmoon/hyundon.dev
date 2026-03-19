@@ -23,7 +23,7 @@ const noteItems = sortedNotes.map((note) => ({
 const searchItems = [...pages, ...noteItems];
 ---
 
-<div id="command-palette" class="palette-backdrop" aria-modal="true" role="dialog" aria-label="Command palette">
+<div id="command-palette" class="palette-backdrop" aria-modal="true" role="dialog" aria-label="Command palette" data-search-items={JSON.stringify(searchItems)}>
   <div class="palette-modal">
     <div class="palette-input-row">
       <span class="palette-label">⌘K</span>
@@ -44,11 +44,9 @@ const searchItems = [...pages, ...noteItems];
   </div>
 </div>
 
-<script is:inline set:html={`window.__SEARCH_ITEMS__ = ${JSON.stringify(searchItems)};`} />
-
 <script>
-  const items = (window as any).__SEARCH_ITEMS__;
   const backdrop = document.getElementById("command-palette")!;
+  const items = JSON.parse(backdrop.dataset.searchItems!);
   const input = document.getElementById("palette-input")! as HTMLInputElement;
   const resultsContainer = document.getElementById("palette-results")!;
   let highlightIndex = 0;
